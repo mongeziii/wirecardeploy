@@ -569,44 +569,23 @@ def render_forensic():
         with cols[i % 2]:
             risk_card(ind['name'], ind['score'], ind['status'], ind['level'], ind['explanation'], ind['implication'])
 
-    st.markdown("<hr>", unsafe_allow_html=True)
-
+       st.markdown("<hr>", unsafe_allow_html=True)
     # Earnings Quality Section
     st.subheader("Earnings Quality Analysis")
-    col1, col2 = st.columns(2)
-    with col1:
-        fig = go.Figure()
-        fig.add_trace(go.Bar(x=df_clean['Year'], y=df_clean['Net_Income'], name='Net Income', marker_color=COLORS['light_blue']))
-        fig.add_trace(go.Bar(x=df_clean['Year'], y=df_clean['Operating_Cash_Flow'], name='Operating Cash Flow', marker_color=COLORS['success']))
-        fig = apply_chart_style(fig, "Earnings vs Cash Generation")
-        fig.update_layout(barmode='group')
-        st.plotly_chart(fig, use_container_width=True)
+    fig = go.Figure()
+    fig.add_trace(go.Bar(x=df_clean['Year'], y=df_clean['Net_Income'], name='Net Income', marker_color=COLORS['light_blue']))
+    fig.add_trace(go.Bar(x=df_clean['Year'], y=df_clean['Operating_Cash_Flow'], name='Operating Cash Flow', marker_color=COLORS['success']))
+    fig = apply_chart_style(fig, "Earnings vs Cash Generation")
+    fig.update_layout(barmode='group')
+    st.plotly_chart(fig, use_container_width=True)
 
-    with col2:
-        st.markdown("""
-        <div style="background: linear-gradient(135deg, #0D2942 0%, #123a5c 100%); border: 1px solid #1a4a7a; border-radius: 12px; padding: 24px;">
-            <h4 style="color: #3FA9F5; margin-bottom: 16px;">📊 Earnings Quality Ratio</h4>
-            <div style="font-size: 2rem; font-weight: 700; color: #FFFFFF; margin-bottom: 8px;">Operating Cash Flow / Net Income</div>
-            <div style="color: #A0B4C8; font-size: 0.9rem; line-height: 1.6; margin-bottom: 16px;">
-                This ratio measures the proportion of reported earnings supported by actual cash flows. 
-                A ratio below 0.8 indicates potential earnings manipulation or aggressive revenue recognition.
-            </div>
-            <div style="border-top: 1px solid #1a4a7a; padding-top: 16px;">
-                <div style="color: #3FA9F5; font-weight: 600; margin-bottom: 8px;">🔍 Forensic Interpretation</div>
-                <div style="color: #A0B4C8; font-size: 0.85rem; line-height: 1.6;">
-        """)
-        latest_eq = df_clean['Earnings_Quality_Ratio'].iloc[-1]
-        if latest_eq < 0.5:
-            st.markdown("<div style='color: #DC2626; font-weight: 600;'>CRITICAL: Operating cash flow is significantly below reported net income. This is a strong indicator of earnings manipulation or fictitious revenue. The company may be booking revenue without corresponding cash collections.</div>", unsafe_allow_html=True)
-        elif latest_eq < 0.8:
-            st.markdown("<div style='color: #F59E0B; font-weight: 600;'>WARNING: Earnings quality is deteriorating. A substantial portion of reported earnings is not supported by operating cash flows. Investigate accruals and revenue recognition policies.</div>", unsafe_allow_html=True)
-        else:
-            st.markdown("<div style='color: #16A34A; font-weight: 600;'>ACCEPTABLE: Earnings are reasonably supported by operating cash flows. Monitor for trends.</div>", unsafe_allow_html=True)
-        st.markdown("""
-                </div>
-            </div>
-        </div>
-        """)
+    latest_eq = df_clean['Earnings_Quality_Ratio'].iloc[-1]
+    if latest_eq < 0.5:
+        st.error("**CRITICAL:** Operating cash flow is significantly below reported net income. This is a strong indicator of earnings manipulation or fictitious revenue. The company may be booking revenue without corresponding cash collections.")
+    elif latest_eq < 0.8:
+        st.warning("**WARNING:** Earnings quality is deteriorating. A substantial portion of reported earnings is not supported by operating cash flows. Investigate accruals and revenue recognition policies.")
+    else:
+        st.success("**ACCEPTABLE:** Earnings are reasonably supported by operating cash flows. Monitor for trends.")
 
     # Beneish M-Score
     st.subheader("Beneish M-Score Analysis")
