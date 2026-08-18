@@ -977,7 +977,7 @@ def render_scenarios():
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=share_prices['Date'], y=share_prices['Share_Price'], mode='lines', name='Share Price', line=dict(color=COLORS['light_blue'], width=2)))
 
-    ]
+    
     for date, label, color in scandal_events:
         fig.add_vline(x=pd.to_datetime(date), line_width=2, line_dash="dash", line_color=color, annotation_text=label, annotation_position="top")
 
