@@ -569,7 +569,7 @@ def render_forensic():
         with cols[i % 2]:
             risk_card(ind['name'], ind['score'], ind['status'], ind['level'], ind['explanation'], ind['implication'])
 
-       st.markdown("<hr>", unsafe_allow_html=True)
+    st.markdown("<hr>", unsafe_allow_html=True)
     # Earnings Quality Section
     st.subheader("Earnings Quality Analysis")
     fig = go.Figure()
