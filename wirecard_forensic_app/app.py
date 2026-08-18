@@ -979,12 +979,18 @@ def render_scenarios():
 
     scandal_events = [
         ('2019-04-25', 'FT: Missing €1.9B', COLORS['danger']),
+
+        
         ('2019-06-18', 'EY Audit Refusal', COLORS['warning']),
+
+        
         ('2020-01-01', 'Admission of Fraud', COLORS['danger']),
+
+        
         ('2020-06-25', 'Insolvency Filing', COLORS['danger']),
     ]
     for date, label, color in scandal_events:
-        fig.add_vline(x=pd.to_datetime(date), line_width=2, line_dash="dash", line_color=color, annotation_text=label, annotation_position="top")
+        fig.add_vline(x=pd.to_datetime(date), line_width=2, line_dash="dash", line_color=color, annotation_text=label, annotation_position="middle")
 
     fig = apply_chart_style(fig, "Share Price with Major Scandal Events")
     st.plotly_chart(fig, use_container_width=True)
