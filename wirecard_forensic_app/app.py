@@ -990,7 +990,7 @@ def render_scenarios():
         ('2020-06-25', 'Insolvency Filing', COLORS['danger']),
     ]
     for date, label, color in scandal_events:
-        fig.add_vline(x=pd.to_datetime(date), line_width=2, line_dash="dash", line_color=color, annotation_text=label, annotation_position="Top")
+        fig.add_vline(x=pd.to_datetime(date), line_width=2, line_dash="dash", line_color=color, annotation_text=label, annotation_position="top")
 
     fig = apply_chart_style(fig, "Share Price with Major Scandal Events")
     st.plotly_chart(fig, use_container_width=True)
