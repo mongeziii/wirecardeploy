@@ -936,14 +936,14 @@ def render_scenarios():
     with col1:
         bear = results['Bear']
         upside = ((bear['value_per_share'] - base_vps) / base_vps) * 100 if base_vps != 0 else 0
-        scenario_card("Bear Case", bear['enterprise_value'], bear['equity_value'], bear['value_per_share'], upside, "bear")
+        scenario_card("Worst Case", bear['enterprise_value'], bear['equity_value'], bear['value_per_share'], upside, "bear")
     with col2:
         base = results['Base']
         scenario_card("Base Case", base['enterprise_value'], base['equity_value'], base['value_per_share'], 0, "base")
     with col3:
         bull = results['Bull']
         upside = ((bull['value_per_share'] - base_vps) / base_vps) * 100 if base_vps != 0 else 0
-        scenario_card("Bull Case", bull['enterprise_value'], bull['equity_value'], bull['value_per_share'], upside, "bull")
+        scenario_card("Best Case", bull['enterprise_value'], bull['equity_value'], bull['value_per_share'], upside, "bull")
 
     st.markdown("<hr>", unsafe_allow_html=True)
 
