@@ -978,7 +978,7 @@ def render_scenarios():
     fig.add_trace(go.Scatter(x=share_prices['Date'], y=share_prices['Share_Price'], mode='lines', name='Share Price', line=dict(color=COLORS['light_blue'], width=2)))
 
     scandal_events = [
-        ('2019-04-25', '€1.9B', COLORS['danger']),
+        ('2019-04-25', '€1.9', COLORS['danger']),
         ('2019-06-18', 'EY', COLORS['warning']),
         ('2020-01-01', 'FRD', COLORS['danger']),
         ('2020-06-25', 'INS', COLORS['danger']),
